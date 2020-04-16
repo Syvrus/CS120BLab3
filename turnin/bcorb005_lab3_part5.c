@@ -32,8 +32,10 @@ int main(void) {
 	s = (tmpD * 2) + tmpBi;
 	if(s >= 70)
 		tmpBo = tmpBo | 0x02;
-	if((s > 5) && (s < 70))
+	else if((s > 5) && (s < 70))
 		tmpBo = tmpBo | 0x04;
+	else
+		tmpBo = 0x00;
 	PORTB = tmpBo;
     }
     return 1;
