@@ -62,6 +62,8 @@ int main(void) {
 			tmpC = 0x00;
 			break;
 	}
+	if(((tmpA & 0x10) >> 4 == 1) && ((tmpA & 0x20) >> 5 == 1) && ((tmpA & 0x40) >> 6 == 0))
+		tmpC = tmpC | 0x80;
 	PORTC = tmpC;
     }
     return 1;
