@@ -26,14 +26,17 @@ int main(void) {
 	unsigned short s;
     /* Insert your solution below */
     while (1) {
-	tmpBi = PINB;
+	tmpBi = PINB & 0x01;
 	tmpD = PIND;
 	tmpBo = 0x00;
 	s = (tmpD * 2) + tmpBi;
 	if(s >= 70)
 		tmpBo = tmpBo | 0x02;
-	if((s > 5) && (s < 70))
+	if((s > 5) && (s < 70)){
 		tmpBo = tmpBo | 0x04;
+	}
+	if(s <= 5)
+		tmpBo = 0x00;
 	PORTB = tmpBo;
     }
     return 1;
