@@ -16,49 +16,52 @@ int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00;
 	PORTA = 0xFF;
-	DDRB = 0x00;
-	PORTB = 0xFF;
+	//DDRB = 0x00;
+	//PORTB = 0xFF;
 	DDRC = 0xFF;
 	PORTC = 0x00;
-	unsigned char cnt, tmpA, tmpB, tmpC;
+	unsigned char gas, tmpA, tmpC;
     /* Insert your solution below */
     while (1) {
 	tmpA = PINA;
-	tmpB = PINB;
-	cnt = 0;
-	if(tmpA & 0x01 == 1)
-		cnt++;
-	if(tmpA & 0x02 == 1)
-		cnt++;
-	if(tmpA & 0x04 == 1)
-		cnt++;
-	if(tmpA & 0x08 == 1)
-		cnt++;
-	if(tmpA & 0x10 == 1)
-		cnt++;
-	if(tmpA & 0x20 == 1)
-		cnt++;
-	if(tmpA & 0x40 == 1)
-		cnt++;
-	if(tmpA & 0x80 == 1)
-		cnt++;
-	if(tmpB & 0x01 == 1)
-		cnt++;
-	if(tmpB & 0x02 == 1)
-		cnt++;
-	if(tmpB & 0x04 == 1)
-		cnt++;
-	if(tmpB & 0x08 == 1)
-		cnt++;
-	if(tmpB & 0x10 == 1)
-		cnt++;
-	if(tmpB & 0x20 == 1)
-		cnt++;
-	if(tmpB & 0x40 == 1)
-		cnt++;
-	if(tmpB & 0x80 == 1)
-		cnt++;
-	tmpC = cnt;
+	gas = tmpA & 0x0F;
+	//tmpB = PINB;
+	tmpC = 0x00;
+	switch(gas){
+		case 0:
+			tmpC = tmpC | 0x40;
+			break;
+		case 1:
+		case 2:
+			tmpC = tmpC | 0x60;
+			break;
+		case 3:
+		case 4:
+			tmpC = tmpC | 0x70;
+			break;
+		case 5:
+		case 6:
+			tmpC = tmpC | 0x38;
+			break;
+		case 7:
+		case 8:
+		case 9:
+			tmpC = tmpC | 0x3C;
+			break;
+		case 10:
+		case 11:
+		case 12:
+			tmpC = tmpC | 0x3E;
+			break;
+		case 13:
+		case 14:
+		case 15:
+			tmpC = tmpC | 0x3F;
+			break;
+		default:
+			tmpC = 0x00;
+			break;
+	}
 	PORTC = tmpC;
     }
     return 1;
